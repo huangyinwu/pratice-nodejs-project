@@ -21,6 +21,12 @@ $.init.add((done) => {
   done();
 });
 
+//初始化mongodb
+$.init.load(path.resolve(__dirname,'init','mongodb.js'));
+//加载models
+$.init.load(path.resolve(__dirname,'models'))
+
+
 //初始化
 $.init((err) => {
   if(err){
