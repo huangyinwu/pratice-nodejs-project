@@ -4,7 +4,10 @@
   "description": "nodejs项目实战",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "wathc": "babel src -d target --watch",
+    "compile": "babel src -d target",
+    "clean": "rm -Rf target"
   },
   "repository": {
     "type": "git",
@@ -15,5 +18,13 @@
   "bugs": {
     "url": "https://github.com/huangyinwu/pratice-nodejs-project/issues"
   },
-  "homepage": "https://github.com/huangyinwu/pratice-nodejs-project#readme"
+  "homepage": "https://github.com/huangyinwu/pratice-nodejs-project#readme",
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-es2015-node4": "^2.1.1",
+    "babel-preset-stage-0": "^6.24.1"
+  },
+  "dependencies": {
+    "project-core": "^2.1.0"
+  }
 }
