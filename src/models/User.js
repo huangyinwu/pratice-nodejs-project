@@ -8,7 +8,7 @@
 import mongoose from 'mongoose';
 
 module.exports = function(done){
-  const Schema = mongoose.Schema,
+  const Schema = mongoose.Schema;
   const ObjectId = Schema.ObjectId;
 
   const User = new Schema({
@@ -17,4 +17,7 @@ module.exports = function(done){
       nickname: {type: String}
   });
   $.mongodb.model('User',User);
+  $.model.User = $.mongodb.model('User');
+
+  done();
 };
