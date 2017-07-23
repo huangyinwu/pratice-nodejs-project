@@ -1,15 +1,23 @@
-'use strict'
+'use strict';
 
 /**
-* pratice node.js project
-* @author huangyinwu <huangyinwu@yeah.net>
-*/
+ * pratice Node.js project
+ *
+ * @author Zongmin Lei <leizongmin@gmail.com>
+ */
 
-module.exports = function(done){
+import path from 'path';
 
-  $.router.get('/',function(req,res,next){
-    res.end('test');
+module.exports = function (done) {
+
+  $.router.get('*', function (req, res, next) {
+    if (req.url.indexOf('/api/') !== 0 && req.url.indexOf('/build/') !== 0) {
+      res.sendFile(path.resolve(__dirname, '../../frontend/index.html'));
+    } else {
+      next();
+    }
   });
 
   done();
+
 };
