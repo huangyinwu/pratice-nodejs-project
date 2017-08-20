@@ -18,14 +18,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/leizongmin/pratice-node-project.git"
+    "url": "git+https://github.com/huangyinwu/pratice-nodejs-project.git"
   },
   "author": "Zongmin Lei <leizongmin@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/leizongmin/pratice-node-project/issues"
+    "url": "https://github.com/huangyinwu/pratice-nodejs-project/issues"
   },
-  "homepage": "https://github.com/leizongmin/pratice-node-project#readme",
+  "homepage": "https://github.com/huangyinwu/pratice-nodejs-project#readme",
   "dependencies": {
     "body-parser": "^1.15.0",
     "bootstrap": "^3.3.6",
