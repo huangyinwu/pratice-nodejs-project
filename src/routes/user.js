@@ -24,6 +24,26 @@ module.exports = function (done) {
     req.session.user.email = user.email;
     req.session.user.nickname = user.nickname;
     req.session.user.about = user.about;
+	req.session.user.githubUsername = user.githubUsername;
+
+    res.apiSuccess(user);
+
+  });
+
+  
+  $.router.post('/api/user/unbindGithub', $.checkLogin, async function (req, res, next) {
+
+    const update = {
+      _id: req.session.user._id,
+    };
+
+    const ret = await $.method('user.update').call(update);
+
+    const user = await $.method('user.get').call({_id: req.session.user._id});
+    req.session.user.email = user.email;
+    req.session.user.nickname = user.nickname;
+    req.session.user.about = user.about;
+	req.session.user.githubUsername = "";
 
     res.apiSuccess(user);
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import jQuery from 'jquery';
-import {loginUser, updateProfile} from '../lib/client';
+import {loginUser, updateProfile,unbindGithub} from '../lib/client';
 import {redirectURL} from '../lib/utils';
 
 export default class Profile extends React.Component {
@@ -34,16 +34,31 @@ export default class Profile extends React.Component {
       });
   }
 
+  handleUnbind(e) {
+    const $btn = jQuery(e.target);
+    $btn.button('loading');
+    unbindGithub()
+      .then(ret => {
+        $btn.button('reset');
+        alert('解绑成功！');
+      })
+      .catch(err => {
+        $btn.button('reset');
+        alert(err);
+      });
+  }
+
   render() {
     if (!this.state._id) {
       return (
         <p>正在加载...</p>
       )
     }
+	const isBind = (this.state.githubUsername!=null && ''!=this.state.githubUsername) ? true : false;
     return (
       <div style={{width: 400, margin: 'auto'}}>
         <div className="panel panel-primary">
-          <div className="panel-heading">{this.state.name} 的个人设置</div>
+          <div className="panel-heading">{this.state.name}的个人设置 {this.state.githubUsername}</div>
             <div className="panel-body">
             <form>
               <div className="form-group">
@@ -58,6 +73,7 @@ export default class Profile extends React.Component {
                 <label htmlFor="ipt-about">个人介绍</label>
                 <textarea className="form-control" id="ipt-about" onChange={this.handleChange.bind(this, 'about')} placeholder="">{this.state.about}</textarea>
               </div>
+              {isBind ? null :<button type="button" className="btn btn-primary" onClick={this.handleSave.bind(this)}>解除GitHub绑定</button>}
               <button type="button" className="btn btn-primary" onClick={this.handleSave.bind(this)}>保存</button>
               </form>
             </div>

@@ -90,6 +90,21 @@ module.exports = function (done) {
 
   });
 
+  
+  $.method('user.unbindGithub').register(async function (params) {
+
+    const user = await $.method('user.get').call(params);
+    if (!user) {
+      throw new Error('user does not exists');
+    }
+
+    const update = {};
+	update.githubUsername = "";
+
+    return $.model.User.update({_id: user._id}, {$set: update});
+
+  });
+
 
   $.method('user.incrScore').check({
     _id: {validate: (v) => validator.isMongoId(String(v)), required: true},
