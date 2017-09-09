@@ -11,36 +11,48 @@ import {request} from '../test';
 
 describe('user', function () {
 
-  it('signup', async function () {
+  it('user profile', async function () {
 
-    try {
-      const ret = await request.post('/api/signup', {
-        name: 'test1',
-        password: '123456789',
-      });
-      throw new Error('should throws missing parameter "email" error');
-    } catch (err) {
-      expect(err.message).to.equal('email: missing parameter "email"');
-    }
-
-    {
-      const ret = await request.post('/api/signup', {
-        name: 'test1',
-        password: '123456789',
-        email: 'test1@example.com',
-      });
-      console.log(ret);
-      expect(ret.user.name).to.equal('test1');
-      expect(ret.user.email).to.equal('test1@example.com');
-    }
+    const request = session();
 
     {
       const ret = await request.post('/api/login', {
-        name: 'test1',
-        password: '123456789',
+        name: 'test2',
+        password: '123456',
       });
       console.log(ret);
       expect(ret.token).to.be.a('string');
+    }
+
+    {
+      const ret = await request.post('/api/user/profile', {});
+      console.log(ret);
+      expect(ret.user.email).to.equal('test2@example.com');
+    }
+
+  });
+
+  it('user reset_password', async function () {
+
+    const request = session();
+
+    {
+      const ret = await request.post('/api/login', {
+        name: 'test2',
+        password: '123456',
+      });
+      console.log(ret);
+      expect(ret.token).to.be.a('string');
+    }
+
+    {
+      const ret = await request.post('/api/user/reset_password', {
+        code: 'test2',
+        email: 'test2@example.com',
+        password: '12345678',		
+	  });
+      console.log(ret);
+      expect(ret.user.email).to.equal('test2@example.com');
     }
 
   });
